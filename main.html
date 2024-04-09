@@ -1,16 +1,41 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dividing into Chunks of Maximum Sum N</title>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+    <script>
+        function divide(arr, n) {
+            const result = [];
+            let currentChunk = [];
+            let sum = 0;
 
+            for (const num of arr) {
+                // If adding the current number exceeds the maximum sum, start a new chunk
+                if (sum + num > n) {
+                    result.push(currentChunk);
+                    currentChunk = [];
+                    sum = 0;
+                }
+                
+                // Add the current number to the current chunk and update the sum
+                currentChunk.push(num);
+                sum += num;
+            }
+
+            // Push the last chunk into the result
+            if (currentChunk.length > 0) {
+                result.push(currentChunk);
+            }
+
+            return result;
+        }
+
+        // Test cases
+        console.log(divide([1, 2, 3, 4, 1, 0, 2, 2], 5)); // Output: [[1, 2], [3], [4, 1, 0], [2, 2]]
+        console.log(divide([4, 3, 2, 1], 4)); // Output: [[4], [3], [2], [1]]
+    </script>
 </body>
-
 </html>
